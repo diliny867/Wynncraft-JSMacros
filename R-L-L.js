@@ -19,8 +19,14 @@ if (GlobalVars.getBoolean("doBufferedSpells")){
     var spellDelay_1 = GlobalVars.getInt("spellDelay_1");
     var spellDelay_2 = GlobalVars.getInt("spellDelay_2");
     var isArcher = GlobalVars.getBoolean("isArcher");
-    castL = !isArcher ? player.attack : player.interact;
-    castR = !isArcher ? player.interact : player.attack;
+
+    const hand = Java.type('net.minecraft.class_1268').field_5808;
+    const AttackPacketType = Java.type('net.minecraft.class_2879');
+    const InteractItemPacketType = Java.type('net.minecraft.class_2886');
+    function sendAttackPacket() {Client.sendPacket(new AttackPacketType(hand))}
+    function sendInteractPacket() {Client.sendPacket(new InteractItemPacketType(hand,0))}
+    var castL = !isArcher ? sendAttackPacket : sendInteractPacket;
+    var castR = !isArcher ? sendInteractPacket : sendAttackPacket;
 
     var overlayMessageField = GlobalVars.getObject("overlayMessageField");
 
