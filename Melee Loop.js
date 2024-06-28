@@ -1,11 +1,10 @@
 
-const player = Player.getPlayer();
+const {castL, castR} = require('./Shared');
+
 var isArcher = GlobalVars.getBoolean("isArcher");
-var melee = !isArcher ? player.attack : player.interact;
+var melee = !isArcher ? castL : castR;
 
 var delay = GlobalVars.getInt("meleeDelay");
-
-var overlayMessageField = GlobalVars.getObject("overlayMessageField");
 
 if (!GlobalVars.getBoolean("isMelee")) {
     GlobalVars.putBoolean("isMelee", true);
@@ -13,7 +12,6 @@ if (!GlobalVars.getBoolean("isMelee")) {
     //let lastTime = 0;
     while (KeyBind.getPressedKeys().contains(event.key)) {
         let overlayMessageText = GlobalVars.getString("spellState");
-        //let overlayMessageText = overlayMessageField.get(Client.getMinecraft().field_1705).getString();
         if(overlayMessageText.length == 5 && overlayMessageText[4] == '?'){ break; }
         //currTime = Time.time();
         //Chat.log(currTime - lastTime);
