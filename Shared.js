@@ -13,10 +13,12 @@ var isArcher = GlobalVars.getBoolean("isArcher");
 var castL = !isArcher ? sendAttackPacket : sendInteractPacket;
 var castR = !isArcher ? sendInteractPacket : sendAttackPacket;
 
-var overlayMessageField = GlobalVars.getObject("overlayMessageField");
+var debug = GlobalVars.getInt("debug");
+
+//var overlayMessageField = GlobalVars.getObject("overlayMessageField");
 
 function castRLL(){
-    if(GlobalVars.getInt("debug")>=1) Chat.log("Casting R-L-L");
+    if(debug>=1) Chat.log("Casting R-L-L");
     if(GlobalVars.getBoolean("checkSpellProcess")){
         let overlayMessageText = GlobalVars.getString("spellState");
         //let overlayMessageText = overlayMessageField.get(Client.getMinecraft().field_1705).getString();
@@ -24,7 +26,7 @@ function castRLL(){
         //    castR();
         //    overlayMessageText = overlayMessageField.get(Client.getMinecraft().field_1705).getString();
         //}
-        if(overlayMessageText.length == 5 && overlayMessageText[4] == '?'){
+        if(overlayMessageText != "-"){
             switch (overlayMessageText[2]){
             case 'L':
                 Time.sleep(spellDelay_1);
@@ -51,10 +53,10 @@ function castRLL(){
     Time.sleep(spellDelay_2);
 }
 function castRLR(){
-    if(GlobalVars.getInt("debug")>=1) Chat.log("Casting R-L-R");
+    if(debug>=1) Chat.log("Casting R-L-R");
     if(GlobalVars.getBoolean("checkSpellProcess")){
         let overlayMessageText = GlobalVars.getString("spellState");
-        if(overlayMessageText.length == 5 && overlayMessageText[4] == '?'){
+        if(overlayMessageText != "-"){
             switch (overlayMessageText[2]){
             case 'L':
                 Time.sleep(spellDelay_1);
@@ -81,10 +83,10 @@ function castRLR(){
     Time.sleep(spellDelay_2);
 }
 function castRRL(){
-    if(GlobalVars.getInt("debug")>=1) Chat.log("Casting R-R-L");
+    if(debug>=1) Chat.log("Casting R-R-L");
     if(GlobalVars.getBoolean("checkSpellProcess")){
         let overlayMessageText = GlobalVars.getString("spellState");
-        if(overlayMessageText.length == 5 && overlayMessageText[4] == '?'){ //Spell progress
+        if(overlayMessageText != "-"){ //Spell progress
             switch (overlayMessageText[2]){
             case 'R':
                 Time.sleep(spellDelay_1);
@@ -111,10 +113,10 @@ function castRRL(){
     Time.sleep(spellDelay_2);
 }
 function castRRR(){
-    if(GlobalVars.getInt("debug")>=1) Chat.log("Casting R-R-R");
+    if(debug>=1) Chat.log("Casting R-R-R");
     if(GlobalVars.getBoolean("checkSpellProcess")){
         let overlayMessageText = GlobalVars.getString("spellState");
-        if(overlayMessageText.length == 5 && overlayMessageText[4] == '?'){
+        if(overlayMessageText != "-"){
             switch (overlayMessageText[2]){
             case 'R':
                 Time.sleep(spellDelay_1);
@@ -143,4 +145,4 @@ function castRRR(){
     Time.sleep(spellDelay_2);
 }
 
-module.exports = {castRLL, castRLR, castRRL, castRRR}
+module.exports = {castL, castR, castRLL, castRLR, castRRL, castRRR}

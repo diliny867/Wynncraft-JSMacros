@@ -1,0 +1,1 @@
+GlobalVars.putBoolean("isArcher", false);

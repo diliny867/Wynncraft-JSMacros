@@ -46,7 +46,7 @@ GlobalVars.putInt("holdSpellDelay", holdSpellDelay);
 
 GlobalVars.putString("spellState", "-");
 
-GlobalVars.putBoolean("isArcher", false);
+//GlobalVars.putBoolean("isArcher", false);
 
 GlobalVars.putInt("debug", debug);
 
@@ -62,3 +62,13 @@ Chat.log("JS Macros Settings Set".concat(GlobalVars.getBoolean("isArcher") ? " (
 //    let actionBar = event.message.getStringStripFormatting();
 //    Chat.log(actionBar);
 //}));
+
+//const printMethods = (obj) => {
+//    let properties = new Set()
+//    let currentObj = obj
+//    do {
+//      Object.getOwnPropertyNames(currentObj).map(item => properties.add(item))
+//    } while ((currentObj = Object.getPrototypeOf(currentObj)))
+//    Chat.log([...properties.keys()]);
+//}
+  
