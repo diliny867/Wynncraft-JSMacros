@@ -18,7 +18,7 @@ My JSMacros scripts used on Wynncraft server
 |Currently unused|OpenContainer|`Archer Detect.js`|Detects archer|
 |Enabled|OpenContainer|`Boon View.js`|Shows lootrun boons|
 |Enabled|ProfileLoad|`Init.js`|Some internal initialization|
-|Currently unused|ChunkLoad|`Is Archer.js`|Also detects archer|
+|Enabled|HeldItemChange|`Is Archer.js`|Also detects archer|
 |Enabled|InteractEntity|`Raid Keeper No Multiple Clicks.js`|Prevents multiple raid keeper clicks|
 |Enabled|JoinServer|`Set Settings.js`|See **Services**|
 |Currently disabled|JoinServer|`Spell Loop.js`|See **Services**|
