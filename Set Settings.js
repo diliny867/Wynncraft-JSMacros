@@ -4,10 +4,15 @@
 //Chat.log(num.toString(2));
 
 const tickMS = 50; //1000/20
-//const spellDelay_1 = 147;
-//const spellDelay_2 = 123;
 const spellDelay_1 = (tickMS*1.55)|0;
 const spellDelay_2 = (tickMS*1.75)|0;
+//const spellDelay_1 = 2;
+//const spellDelay_2 = 3;
+
+const holdSpellDelay = (tickMS*1.6)|0;
+//const holdSpellDelay = 2;
+
+const spellDelayInTicks = false;
 
 const timeThreshold = 275;
 const timeDelay = 25;
@@ -21,12 +26,12 @@ const checkSpellProcess = true;
 const doBufferedSpells = false;
 const maxBufferedSpells = 3;
 
-const holdSpellDelay = (tickMS*1.6)|0;
-
 const debug = 0;
 
 GlobalVars.putInt("spellDelay_1", spellDelay_1);
 GlobalVars.putInt("spellDelay_2", spellDelay_2);
+
+GlobalVars.putBoolean("spellDelayInTicks", spellDelayInTicks);
 
 GlobalVars.putInt("timeThreshold", timeThreshold);
 GlobalVars.putInt("timeDelay", timeDelay);

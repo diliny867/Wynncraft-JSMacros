@@ -1,3 +1,5 @@
+// Code not mine. Source: ETKW Discord server, @_soumen
+
 const maxstacklist = {
     "Persnickety": 1, 
     "Picky Looter": 15, 
