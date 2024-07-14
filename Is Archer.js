@@ -1,17 +1,3 @@
-//Chat.log("a");
-//Chat.log("E: ");
-//Chat.log(event.entity.getName());
-//Chat.log("P: ");
-//Chat.log(Player.getPlayer().getName());
-
-//Chat.log(event.entity.getName() == "diliny867");
-
-//if (event.entity.getType() == "minecraft:player"){
-//    Chat.log(event.entity.getName());
-//}
-
-//if(event.entity.getName() == Player.getPlayer().getName()){
-
 
 function isArcher() {
     let slot = Player.openInventory().getSelectedHotbarSlotIndex();
@@ -33,11 +19,5 @@ function isArcher() {
 if(Player.openInventory().getTotalSlots() == 46 && //if player inventory
         Player.getPlayer().getRaw().method_45773() != ""){ //like the only way i found to check if player is riding a horse
     GlobalVars.putBoolean("isArcher", isArcher());
+    //Chat.log(GlobalVars.getBoolean("isArcher"));
 }
-
-//Chat.log("a")
-//Chat.log(event.entity.getName());
-//Chat.log(Player.getPlayer().getName());
-
-
-//}

@@ -9,9 +9,21 @@ const player = Player.getPlayer();
 var spellDelay_1 = GlobalVars.getInt("spellDelay_1");
 var spellDelay_2 = GlobalVars.getInt("spellDelay_2");
 var isArcher = GlobalVars.getBoolean("isArcher");
+var debug = GlobalVars.getInt("debug");
 
-var castL = !isArcher ? sendAttackPacket : sendInteractPacket;
-var castR = !isArcher ? sendInteractPacket : sendAttackPacket;
+if(debug > 0){
+    var castL = () => {
+        Chat.log("Casting L"); 
+        !isArcher ? sendAttackPacket() : sendInteractPacket();
+    };
+    var castR = () => {
+        Chat.log("Casting R");
+        !isArcher ? sendInteractPacket() : sendAttackPacket();
+    };
+}else{
+    var castL = !isArcher ? sendAttackPacket : sendInteractPacket;
+    var castR = !isArcher ? sendInteractPacket : sendAttackPacket;
+}
 
 var debug = GlobalVars.getInt("debug");
 

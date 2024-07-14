@@ -46,12 +46,11 @@ let actionBar = event.message.getStringStripFormatting();
 //    GlobalVars.putInt("spellState", spellState);
 //}
 
-if(actionBar.length > 0){
-    if(actionBar.length == 5 && actionBar[4] == '?'){
-        GlobalVars.putString("spellState", actionBar);
-    }else {
-        GlobalVars.putString("spellState", "-");
-    }
+if(actionBar.length == 5 && actionBar[4] == '?'){
+    GlobalVars.putString("spellState", actionBar);
+    //Chat.log("TO: ".concat(GlobalVars.getString("spellState")));
+}else{
+    GlobalVars.putString("spellState", "-");
 }
-
+//Chat.log("TO: ".concat(GlobalVars.getString("spellState")).concat(" ").concat(actionBar.length));
 //Chat.log("Global: " + GlobalVars.getString("spellState"));
