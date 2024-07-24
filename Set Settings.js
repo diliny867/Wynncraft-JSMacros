@@ -4,8 +4,10 @@
 //Chat.log(num.toString(2));
 
 const tickMS = 50; //1000/20
+//const spellDelay_1 = 60;
+//const spellDelay_2 = 90;
 const spellDelay_1 = (tickMS*1.55)|0;
-const spellDelay_2 = (tickMS*1.75)|0;
+const spellDelay_2 = (tickMS*1.8)|0;
 //const spellDelay_1 = 2;
 //const spellDelay_2 = 3;
 
@@ -56,12 +58,22 @@ GlobalVars.putString("spellState", "-");
 GlobalVars.putInt("debug", debug);
 
 
+const crowdSourceDataManager = Java.type("com.wynntils.core.crowdsource.CrowdSourcedDataManager");
+const gameVersion = crowdSourceDataManager.CURRENT_GAME_VERSION.getReadableVersion();
+let gameVersionDouble = 0;
+let divisor = 1;
+for(const n of gameVersion.split('.')){
+    gameVersionDouble += Number(n.split(' ')[0]) / divisor;
+    divisor *= 10;
+}
+GlobalVars.putDouble("gameVersion", gameVersionDouble); // it is easier to work with double
+
 const overlayMessageField = Reflection.getClass("net.minecraft.class_329").getDeclaredField("field_2018");
 overlayMessageField.setAccessible(true);
 GlobalVars.putObject("overlayMessageField", overlayMessageField);
 
 
-Chat.log("JS Macros Settings Set".concat(GlobalVars.getBoolean("isArcher") ? " (Archer)" : " (Not Archer)"));
+Chat.log("JS Macros Settings Set. Game Version: " + gameVersionDouble.toString()); //.concat(GlobalVars.getBoolean("isArcher") ? " (Archer)" : " (Not Archer)")
 
 //JsMacros.on('Title', JavaWrapper.methodToJava(event => {
 //    let actionBar = event.message.getStringStripFormatting();

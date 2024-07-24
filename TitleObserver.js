@@ -1,5 +1,41 @@
 let actionBar = event.message.getStringStripFormatting();
-//Chat.log(actionBar);
+
+var debug = GlobalVars.getBoolean("debug");
+var gameVersion = GlobalVars.getDouble("gameVersion");
+
+// THIS CHARACTER IN QUOTES IS RIGHT SPELL OCCURENCE: ""
+// THIS CHARACTER IN QUOTES IS LEFT SPELL OCCURENCE: ""
+
+if(gameVersion >= 2.1){
+    let actionBarSpells = "?-?-?";
+    let spellClickCount = 0;
+    for(let i=120;i<actionBar.length && spellClickCount < 3;i++){ // as I seen these characters alvays appear past 120th index
+        if(actionBar[i] == ""){ // R
+            spellClickCount++;
+            actionBarSpells[spellClickCount*2] = 'R';
+            //Chat.log("R" + i);
+        }
+        if(actionBar[i] == ""){ // L
+            spellClickCount++;
+            actionBarSpells[spellClickCount*2] = 'L';
+            //Chat.log("L" + i);
+        }
+    }
+    //Chat.log("\n");
+
+    if(spellClickCount > 0 && spellClickCount < 3){ //if action bar is empty or full, cast full spell (pass empty spellState)
+        GlobalVars.putString("spellState", actionBarSpells);
+    }else{
+        GlobalVars.putString("spellState", "-");
+    }
+}else{
+    if(actionBar.length == 5 && actionBar[4] == '?'){
+        GlobalVars.putString("spellState", actionBar);
+    }else{
+        GlobalVars.putString("spellState", "-");
+    }
+}
+
 
 /* states for spells:
 0: Not spell ([Sprint] or other)
@@ -11,46 +47,3 @@ let actionBar = event.message.getStringStripFormatting();
 6: R-R-? or L-L-?
 7: R-?-? or L-?-?
 */
-//if(actionBar.length > 0){
-//    var spellState = 0;
-//    if(actionBar.length == 5){
-//        let firstR = actionBar[0] == 'R';
-//        switch(actionBar[4]){
-//        case 'R':
-//            if(actionBar[2] == 'R'){
-//                spellState = firstR ? 2 : 3;
-//            }else{
-//                spellState = firstR ? 1 : 4;
-//            }
-//            break;
-//        case 'L':
-//            if(actionBar[2] == 'R'){
-//                spellState = firstR ? 4 : 1;
-//            }else{
-//                spellState = firstR ? 3 : 2;
-//            }
-//            break;
-//        case '?':
-//            if(actionBar[2] == 'R'){
-//                spellState = firstR ? 6 : 5;
-//            }else{
-//                if(actionBar[2] == 'L'){
-//                    spellState = firstR ? 5 : 6;
-//                }else{
-//                    spellState = 7;
-//                }
-//            }
-//            break;
-//        }
-//    }
-//    GlobalVars.putInt("spellState", spellState);
-//}
-
-if(actionBar.length == 5 && actionBar[4] == '?'){
-    GlobalVars.putString("spellState", actionBar);
-    //Chat.log("TO: ".concat(GlobalVars.getString("spellState")));
-}else{
-    GlobalVars.putString("spellState", "-");
-}
-//Chat.log("TO: ".concat(GlobalVars.getString("spellState")).concat(" ").concat(actionBar.length));
-//Chat.log("Global: " + GlobalVars.getString("spellState"));
