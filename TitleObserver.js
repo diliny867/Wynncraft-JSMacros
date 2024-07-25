@@ -11,16 +11,17 @@ if(gameVersion >= 2.1){
     let spellClickCount = 0;
     for(let i=120;i<actionBar.length && spellClickCount < 3;i++){ // as I seen these characters alvays appear past 120th index
         if(actionBar[i] == ""){ // R
+            actionBarSpells = actionBarSpells.substring(0,spellClickCount*2) + 'R' + actionBarSpells.substring(spellClickCount*2 + 1);
             spellClickCount++;
-            actionBarSpells[spellClickCount*2] = 'R';
             //Chat.log("R" + i);
         }
         if(actionBar[i] == ""){ // L
+            actionBarSpells = actionBarSpells.substring(0,spellClickCount*2) + 'L' + actionBarSpells.substring(spellClickCount*2 + 1);
             spellClickCount++;
-            actionBarSpells[spellClickCount*2] = 'L';
             //Chat.log("L" + i);
         }
     }
+    //Chat.log(actionBarSpells);
     //Chat.log("\n");
 
     if(spellClickCount > 0 && spellClickCount < 3){ //if action bar is empty or full, cast full spell (pass empty spellState)

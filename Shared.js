@@ -11,7 +11,11 @@ const player = Player.getPlayer();
 var spellDelay_1 = GlobalVars.getInt("spellDelay_1");
 var spellDelay_2 = GlobalVars.getInt("spellDelay_2");
 var spellDelayInTicks = GlobalVars.getBoolean("spellDelayInTicks");
-var isArcher = GlobalVars.getBoolean("isArcher");
+
+//var isArcher = GlobalVars.getBoolean("isArcher");
+const models = Java.type("com.wynntils.core.components.Models");
+currentClass = models.Character.getClassType().toString();
+var isArcher = currentClass.includes("Archer");
 
 if(debug > 0){
     var castL = () => {
@@ -28,11 +32,11 @@ if(debug > 0){
 }
 
 if(spellDelayInTicks){
-    var delayShort = () => Client.waitTick(spellDelay_1);
-    var delayLong = () => Client.waitTick(spellDelay_2);
+    var delayMain = () => Client.waitTick(spellDelay_1);
+    var delayAfter = () => Client.waitTick(spellDelay_2);
 }else{
-    var delayShort = () => Time.sleep(spellDelay_1);
-    var delayLong = () => Time.sleep(spellDelay_2);
+    var delayMain = () => Time.sleep(spellDelay_1);
+    var delayAfter = () => Time.sleep(spellDelay_2);
 }
 
 //var overlayMessageField = GlobalVars.getObject("overlayMessageField");
@@ -44,23 +48,23 @@ function castSpell(smartCompleteL, smartCompleteR, smartCompleteQ, fullSpellFunc
         if(overlayMessageText != "-"){
             switch (overlayMessageText[2]){
                 case 'L':
-                    delayShort();
+                    delayMain();
                     smartCompleteL();
                     break;
                 case 'R':
-                    delayShort();
+                    delayMain();
                     smartCompleteR();
                     break;
                 case '?':
                     smartCompleteQ();
                     break;
                 }
-            delayLong();
+            delayAfter();
             return;
         }
     }
     fullSpellFunc();
-    delayLong();
+    delayAfter();
 }
 function castRLL(){
     castSpell(
@@ -68,13 +72,13 @@ function castRLL(){
         !isArcher ? castL : castL, 
         () => {
             castL();
-            delayShort();
+            delayMain();
             castL();
         }, 
         () => {
             castR();
             castL();
-            delayShort();
+            delayMain();
             castL();
         }, 
         "R-L-L"
@@ -86,34 +90,34 @@ function castRLR(){
         !isArcher ? castL : castR, 
         () => {
             castL();
-            delayShort();
+            delayMain();
             castR();
         }, 
         () => {
             castR();
             castL();
-            delayShort();
+            delayMain();
             castR();
         }, 
-        "R-L-L"
+        "R-L-R"
     );
 }
 function castRRL(){
     castSpell(
         !isArcher ? castL : castR, 
-        !isArcher ? castR : castL, 
+        !isArcher ? castL : castR, 
         () => {
-            delayShort();
+            delayMain();
             castR();
             castL();
         }, 
         () => {
             castR();
-            delayShort();
+            delayMain();
             castR();
             castL();
         }, 
-        "R-L-L"
+        "R-R-L"
     );
 }
 function castRRR(){
@@ -121,19 +125,19 @@ function castRRR(){
         !isArcher ? castR : castL, 
         !isArcher ? castR : castL, 
         () => {
-            delayShort();
+            delayMain();
             castR();
-            delayShort();
+            delayMain();
             castR();
         }, 
         () => {
             castR();
-            delayShort();
+            delayMain();
             castR();
-            delayShort();
+            delayMain();
             castR();
         }, 
-        "R-L-L"
+        "R-R-R"
     );
 }
 
