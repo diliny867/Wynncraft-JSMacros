@@ -8,8 +8,8 @@ function sendAttackPacket() {Client.sendPacket(new AttackPacketType(hand))}
 function sendInteractPacket() {Client.sendPacket(new InteractItemPacketType(hand,0))}
 
 const player = Player.getPlayer();
-var spellDelay_1 = GlobalVars.getInt("spellDelay_1");
-var spellDelay_2 = GlobalVars.getInt("spellDelay_2");
+var spellDelay_Main = GlobalVars.getInt("spellDelay_Main");
+var spellDelay_After = GlobalVars.getInt("spellDelay_After");
 var spellDelayInTicks = GlobalVars.getBoolean("spellDelayInTicks");
 
 //var isArcher = GlobalVars.getBoolean("isArcher");
@@ -32,11 +32,11 @@ if(debug > 0){
 }
 
 if(spellDelayInTicks){
-    var delayMain = () => Client.waitTick(spellDelay_1);
-    var delayAfter = () => Client.waitTick(spellDelay_2);
+    var delayMain = () => Client.waitTick(spellDelay_Main);
+    var delayAfter = () => Client.waitTick(spellDelay_After);
 }else{
-    var delayMain = () => Time.sleep(spellDelay_1);
-    var delayAfter = () => Time.sleep(spellDelay_2);
+    var delayMain = () => Time.sleep(spellDelay_Main);
+    var delayAfter = () => Time.sleep(spellDelay_After);
 }
 
 //var overlayMessageField = GlobalVars.getObject("overlayMessageField");
@@ -146,7 +146,7 @@ function worldCastSpell(spellCastFunc){
     var timeDelay = GlobalVars.getInt("timeDelay");
     var time = Time.time();
     var targetTime = time + timeThreshold;
-    var holdSpellDelay = GlobalVars.getInt("holdSpellDelay");
+    var spellDelay_Hold = GlobalVars.getInt("spellDelay_Hold");
 
     while(GlobalVars.getBoolean("isChanneling") && time <= targetTime) {
         Time.sleep(timeDelay)
@@ -157,7 +157,7 @@ function worldCastSpell(spellCastFunc){
             GlobalVars.putBoolean("isChanneling", true);
             spellCastFunc();
             GlobalVars.putBoolean("isChanneling", false);
-            Time.sleep(holdSpellDelay);
+            Time.sleep(spellDelay_Hold);
         } while(KeyBind.getPressedKeys().contains(event.key));
     }
 }

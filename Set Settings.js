@@ -6,12 +6,12 @@
 const tickMS = 50; //1000/20
 //const spellDelay_1 = 60;
 //const spellDelay_2 = 90;
-const spellDelay_1 = (tickMS*1.55)|0;
-const spellDelay_2 = (tickMS*1.8)|0;
+const spellDelay_Main = (tickMS*1.55)|0;
+const spellDelay_After = 1;
 //const spellDelay_1 = 2;
 //const spellDelay_2 = 3;
 
-const holdSpellDelay = (tickMS*1.6)|0;
+const spellDelay_Hold = (tickMS*1.6)|0;
 //const holdSpellDelay = 2;
 
 const spellDelayInTicks = false;
@@ -30,8 +30,8 @@ const maxBufferedSpells = 3;
 
 const debug = 0;
 
-GlobalVars.putInt("spellDelay_1", spellDelay_1);
-GlobalVars.putInt("spellDelay_2", spellDelay_2);
+GlobalVars.putInt("spellDelay_Main", spellDelay_Main);
+GlobalVars.putInt("spellDelay_After", spellDelay_After);
 
 GlobalVars.putBoolean("spellDelayInTicks", spellDelayInTicks);
 
@@ -49,7 +49,7 @@ GlobalVars.putInt("maxBufferedSpells", maxBufferedSpells);
 GlobalVars.putInt("channelingSpellCount", 0);
 GlobalVars.putInt("spellBuffer", 0);
 
-GlobalVars.putInt("holdSpellDelay", holdSpellDelay);
+GlobalVars.putInt("spellDelay_Hold", spellDelay_Hold);
 
 GlobalVars.putString("spellState", "-");
 
@@ -63,7 +63,7 @@ const gameVersion = crowdSourceDataManager.CURRENT_GAME_VERSION.getReadableVersi
 let gameVersionDouble = 0;
 let onBeta = models.WorldState.isOnBetaServer();
 if(onBeta){
-    gameVersionDouble = 2.1; // dont know any ways of getting beta version, so time hardcode it 
+    gameVersionDouble = 2.1; // dont know any ways of getting beta version, so time to hardcode it 
 }else{
     let divisor = 1; // get global version
     for(const n of gameVersion.split('.')){
@@ -72,13 +72,14 @@ if(onBeta){
     }
 }
 GlobalVars.putDouble("gameVersion", gameVersionDouble); // it is easier to work with double
+//GlobalVars.putObject("wynntilsModels", models); // it is easier to work with double
 
 const overlayMessageField = Reflection.getClass("net.minecraft.class_329").getDeclaredField("field_2018");
 overlayMessageField.setAccessible(true);
 GlobalVars.putObject("overlayMessageField", overlayMessageField);
 
 let versionString = (onBeta ? "Beta " : "").concat(gameVersionDouble.toString());
-Chat.log("JS Macros Settings Set. Game Version: " + versionString); //.concat(GlobalVars.getBoolean("isArcher") ? " (Archer)" : " (Not Archer)")
+Chat.log("JS Macros Settings Set - Wynncraft " + versionString); //.concat(GlobalVars.getBoolean("isArcher") ? " (Archer)" : " (Not Archer)")
 
 //JsMacros.on('Title', JavaWrapper.methodToJava(event => {
 //    let actionBar = event.message.getStringStripFormatting();
