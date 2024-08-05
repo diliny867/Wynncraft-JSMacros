@@ -31,6 +31,13 @@ My JSMacros scripts used on Wynncraft server
 |Disabled|Click *Stopped* to run, click again to stop|`Spell Loop.js`|Currently broken loop for casting buffered spells (i believe this is banned on Wynncraft, so use on your own risk)|
 |Disabled|Click *Stopped* to run once|`Toggle Archer.js`|Toggles spells to be cast for archer or for not archer|
 
+## Chat Commands
+|`/spells`|Effect|
+|---------|------|
+|`spelldelay`/`sd` -> type(`main`/`after`/`hold`) -> int value|Changes corresponding delay for spells|
+|`debug` -> int value|Changes debug level|
+|`variable` -> type(`int`/`double`/`bool`/`string`/`object`) -> value|Changes corresponding GlobalVar|
+
 ## Taken code
 ### From ETKW Discord (`code` chat category):
 - Melee loop
